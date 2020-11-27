@@ -12,6 +12,10 @@ plugins {
 
     // Apply the application plugin to add support for building a CLI application.
     id 'application'
+
+     // https://imperceptiblethoughts.com/shadow/getting-started/#default-java-groovy-tasks
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+
 }
 
 repositories {
@@ -19,6 +23,7 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
+
 
 dependencies {
     // This dependency is used by the application.
@@ -30,18 +35,10 @@ dependencies {
     // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
 
-    //yeni ekledigim
-        compile 'com.sparkjava:spark-core:2.2'
-
-        compile 'com.sparkjava:spark-template-mustache:2.5.5'
-
-        testImplementation('junit:junit:4.13')
-
-    implementation "org.apache.logging.log4j:log4j-api:2.13.3"
-    implementation "org.apache.logging.log4j:log4j-core:2.13.3"
-    implementation "org.apache.logging.log4j:log4j-slf4j-impl:2.13.3"
-
+    implementation "com.sparkjava:spark-core:2.9.3"
+    implementation "com.sparkjava:spark-template-mustache:2.7.1"
 }
+
 
 application {
     // Define the main class for the application.
