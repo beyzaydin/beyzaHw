@@ -88,6 +88,11 @@ public class App
       get("/compute",
           (rq, rs) -> {
             Map<String, String> map = new HashMap<String, String>();
+            map.put("In the first form,", "enter a list of integer that you want to compare index x with second array");
+            map.put("In the second form,", "enter a list of integer that you want to compare index x with first array");
+            map.put("In the third form,", "enter a integer. This integer will be used as an index ");
+            map.put("If the first[x] and  second[x] are equals,", "it should return true, otherwise should return false.");
+
             map.put("result", "not computed yet!");
             return new ModelAndView(map, "compute.mustache");
           },
