@@ -24,6 +24,7 @@ public class App
 
   public static boolean isItEqualAtX(ArrayList<Integer> arr1, ArrayList<Integer> arr2, int x){
     System.out.println("position confirmation");
+    x--;
     
     if (arr1 == null || arr2 == null) return false;
 

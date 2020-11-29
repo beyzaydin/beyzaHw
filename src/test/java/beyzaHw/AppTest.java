@@ -16,26 +16,37 @@ class AppTest {
     }
 
    @Test
-   public void testFound() {
-      ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
-      assertTrue(App.search(array, 4));
+   public void testEqual() {
+      ArrayList<Integer> arr1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+      ArrayList<Integer> arr2 = new ArrayList<>(Arrays.asList(4, 2, 1, 3));
+
+      assertTrue(App.isItEqualAtX(arr1, arr2, 2));
     }
 
     @Test
-    public void testNotFound() {
-      ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
-      assertFalse(App.search(array, 5));
+    public void testNotEqual() {
+      ArrayList<Integer> arr1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+      ArrayList<Integer> arr2 = new ArrayList<>(Arrays.asList(4, 2, 1, 3));
+      assertFalse(App.isItEqualAtX(arr1, arr2, 3));
     }
 
     @Test
     public void testEmptyArray() {
-      ArrayList<Integer> array = new ArrayList<>();
-      assertFalse(App.search(array, 1));
+      ArrayList<Integer> arr1 = new ArrayList<>();
+      ArrayList<Integer> arr2 = new ArrayList<>(Arrays.asList(4, 2, 1, 3));
+      assertFalse(App.isItEqualAtX(arr1, arr2, 3));
     }
 
     @Test
     public void testNull() {
-      assertFalse(App.search(null, 1));
+      ArrayList<Integer> arr2 = new ArrayList<>(Arrays.asList(4, 2, 1, 3));
+      assertFalse(App.isItEqualAtX(null, arr2, 1));
     }
 
+    @Test
+    public void testxIsOutOfBounds(){
+      ArrayList<Integer> arr1 = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+      ArrayList<Integer> arr2 = new ArrayList<>(Arrays.asList(4, 2, 1, 3));
+      assertThrows(NullPointerException.class , () -> {App.isItEqualAtX(arr1, arr2, -1);});
+    }
 }
