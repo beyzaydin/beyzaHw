@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import spark.ModelAndView;
 import spark.template.mustache.MustacheTemplateEngine;
+
 
 public class App
 {
@@ -20,14 +22,20 @@ public class App
       return "Hello world.";
   }
 
-  public static boolean search(ArrayList<Integer> array, int e) {
-    System.out.println("inside search");
-    if (array == null) return false;
+  public static boolean isItEqualAtX(ArrayList<Integer> arr1, ArrayList<Integer> arr2, int x){
+    System.out.println("position confirmation");
+    
+    if (arr1 == null || arr2 == null) return false;
 
-    for (int elt : array) {
-      if (elt == e) return true;
-    }
-    return false;
+    if(arr1.isEmpty() || arr2.isEmpty() ) return false;
+
+    if(x < 0) throw new NullPointerException();
+    if(x >= arr1.size() || x >= arr2.size() ) throw new NullPointerException();
+
+    if(arr1.get(x).equals(arr2.get(x)) ) 
+      return true;
+    else 
+      return false;
   }
 
   public static void main(String[] args) {
@@ -39,8 +47,8 @@ public class App
         //System.out.println(req.queryParams("input1"));
         //System.out.println(req.queryParams("input2"));
 
-        String input1 = req.queryParams("input1");
-        java.util.Scanner sc1 = new java.util.Scanner(input1);
+        String in1 = req.queryParams("input1");
+        java.util.Scanner sc1 = new java.util.Scanner(in1);
         sc1.useDelimiter("[;\r\n]+");
         java.util.ArrayList<Integer> inputList = new java.util.ArrayList<>();
         while (sc1.hasNext())
@@ -51,11 +59,24 @@ public class App
         sc1.close();
         System.out.println(inputList);
 
+        //input2 icin 
+        String in2 = req.queryParams("input2");
+        java.util.Scanner sc2 = new java.util.Scanner(in2);
+        sc2.useDelimiter("[;\r\n]+");
+        java.util.ArrayList<Integer> inputList2 = new java.util.ArrayList<>();
+        while (sc2.hasNext())
+        {
+          int value = Integer.parseInt(sc2.next().replaceAll("\\s",""));
+          inputList2.add(value);
+        }
+        sc2.close();
+        System.out.println(inputList2);
 
-        String input2 = req.queryParams("input2").replaceAll("\\s","");
-        int input2AsInt = Integer.parseInt(input2);
 
-        boolean result = App.search(inputList, input2AsInt);
+        String in3 = req.queryParams("input3").replaceAll("\\s","");
+        int input3AsInt = Integer.parseInt(in3);
+
+        boolean result = App.isItEqualAtX(inputList, inputList2 ,input3AsInt); 
 
         Map<String, Boolean> map = new HashMap<String, Boolean>();
         map.put("result", result);
@@ -80,5 +101,3 @@ public class App
       return 4569; //return default port if heroku-port isn't set (i.e. on localhost)
   }
 }
-
-
